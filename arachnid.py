@@ -6,11 +6,11 @@ from tacoshell import taco_wrap
 url = 'https://www.vg.no'
 variables = [{'name': 'url', 'type': 'StringVar', 'value': url}]
 settings = [{'name': 'element_source',
-             'kwargs': {'handle': 'test', 'var': 'url'}}]
+             'kwargs': {'handle': 'test', 'index': 4, 'var': 'url'}}]
 
 
 @taco_wrap(variables, settings)
-def request():
+def request(**kwargs):
     use_proxy = False  # Must be on while inside corporate network
     if use_proxy:
         # http://proxyconf-uba.siemens.net/proxy-coia.pac
@@ -19,7 +19,7 @@ def request():
         opener = urllib.request.build_opener(proxy)
         urllib.request.install_opener(opener)
 
-    response = urllib.request.urlopen(url)
+    response = urllib.request.urlopen(kwargs['url'].get())
     bytes_ = response.read()
     html = bytes_.decode("utf8")
 
