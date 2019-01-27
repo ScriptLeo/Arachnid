@@ -1,17 +1,16 @@
 import urllib.request
 from bs4 import BeautifulSoup
-from tacoshell import taco_wrap
-
+from tacoshell import taco_wrap, cvar
 
 url = 'https://www.vg.no'
-variables = [{'name': 'url', 'type': 'StringVar', 'value': url}]
-settings = [{'name': 'element_source',
-             'kwargs': {'handle': 'test', 'index': 4, 'var': 'url'}}]
+variables = [cvar('_url', 'StringVar', url)]
+settings = [{'key': 'element_source',
+             'kwargs': {'handle': 'arachnid', 'index': 3, 'var': '_url'}}]
 
 
 @taco_wrap(variables, settings)
-def request(**kwargs):
-    use_proxy = False  # Must be on while inside corporate network
+def request(_url):
+    use_proxy = True  # Must be on while inside corporate network
     if use_proxy:
         # http://proxyconf-uba.siemens.net/proxy-coia.pac
         proxy = urllib.request.ProxyHandler({'http': 'http://194.138.0.7:9400',
@@ -19,7 +18,7 @@ def request(**kwargs):
         opener = urllib.request.build_opener(proxy)
         urllib.request.install_opener(opener)
 
-    response = urllib.request.urlopen(kwargs['url'].get())
+    response = urllib.request.urlopen(_url.get())
     bytes_ = response.read()
     html = bytes_.decode("utf8")
 

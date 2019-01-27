@@ -7,6 +7,7 @@
     <orderEntry type="jdk" jdkName="Python 3.7 (Arachnid)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="TacoShell" />
+    <orderEntry type="module" module-name="TacoShell" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />
